@@ -1,4 +1,5 @@
 const express = require("express");
+const { todoValidetor } = require("../middleware/todoValidetor");
 const router = express.Router();
 const {
   getProduct,
@@ -7,7 +8,7 @@ const {
   deletProduct,
 } = require("../controller/productController");
 
-router.route("/").get(getProduct).post(createProduct);
+router.route("/").get(getProduct).post(todoValidetor, createProduct);
 router.route("/:id").put(updateProduct).delete(deletProduct);
 
 module.exports = router;
