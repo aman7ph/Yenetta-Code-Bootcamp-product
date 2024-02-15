@@ -19,6 +19,7 @@ const signUp = async (req, res) => {
     username,
     email,
     password: hashedPassword,
+    //role: "admin",
   });
 
   if (!user) {
@@ -49,7 +50,7 @@ const login = async (req, res) => {
   }
 };
 const getProfile = (req, res) => {
-  console.log("profile");
+  res.status(200).json(req.user);
 };
 
 const generateToken = (id) => {
