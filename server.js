@@ -8,13 +8,18 @@ const port = process.env.PORT;
 connectDB();
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Only accept requests from this origin
-  credentials: true, // Allow credentials (cookies, authentication, etc.)
+  origin: "http://localhost:5173",
+  credentials: true,
 };
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  next();
+});
 
 app.use("/api/product", require("./routes/productRoute"));
 app.use("/api/user", require("./routes/userRoute"));
