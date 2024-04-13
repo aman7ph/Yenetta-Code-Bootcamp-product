@@ -2,20 +2,18 @@ const Joi = require("joi");
 const Product = require("../models/productModel");
 
 const getAllProduct = async (req, res) => {
-  try {
-    const allProducts = await Product.find();
-    res.status(200).json({ allProducts });
-  } catch (err) {
-    res.status(400).json({ err });
+  const allProducts = await Product.find();
+  if (!allProducts) {
+    res.status(400).json({ error: "somthing went wrong" });
   }
+  res.status(200).json({ allProducts });
 };
 const getProduct = async (req, res) => {
-  try {
-    const products = await Product.find({ owner: req.user.id });
-    res.status(200).json({ products });
-  } catch (err) {
-    res.status(400).json({ err });
+  const products = await Product.find({ owner: req.user.id });
+  if (!products) {
+    res.status(400).json({ error: "somthing went wrong" });
   }
+  res.status(200).json({ products });
 };
 
 const createProduct = async (req, res) => {
