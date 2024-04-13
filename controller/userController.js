@@ -19,9 +19,8 @@ const signUp = async (req, res) => {
     username,
     email,
     password: hashedPassword,
-    role: "admin",
   });
-
+  // role: "admin",
   if (!user) {
     res.status(400).json({ error: "somthing went wrong" });
   }
@@ -29,6 +28,7 @@ const signUp = async (req, res) => {
     id: user._id,
     username: user.username,
     email: user.email,
+    role: user.role,
     token: generateToken(user._id),
   });
 };
@@ -43,6 +43,7 @@ const login = async (req, res) => {
       id: user._id,
       name: user.username,
       email: user.email,
+      role: user.role,
       token: generateToken(user._id),
     });
   } else {
