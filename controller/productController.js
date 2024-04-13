@@ -21,10 +21,10 @@ const getProduct = async (req, res) => {
 const createProduct = async (req, res) => {
   const product = await Product.create({
     owner: req.user.id,
-    product_name: req.body.product_name,
-    product_price: req.body.product_price,
-    product_quantity: req.body.product_quantity,
-    product_description: req.body.product_description,
+    name: req.body.name,
+    price: req.body.price,
+    quantity: req.body.quantity,
+    description: req.body.description,
   });
 
   res.status(200).json(product);

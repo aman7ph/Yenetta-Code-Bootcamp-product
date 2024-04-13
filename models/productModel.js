@@ -7,16 +7,16 @@ const ProductSchema = mongoose.Schema(
       require: true,
       ref: "User",
     },
-    product_name: {
+    name: {
       type: String,
     },
-    product_price: {
+    price: {
       type: Number,
     },
-    product_quantity: {
+    quantity: {
       type: Number,
     },
-    product_description: {
+    description: {
       type: String,
     },
   },
