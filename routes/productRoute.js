@@ -14,7 +14,7 @@ const {
 router
   .route("/")
   .get(protect, getProduct)
-  .post(protect, productValidator, createProduct);
+  .post(productValidator, protect, createProduct);
 router.route("/:id").put(protect, updateProduct).delete(protect, deletProduct);
 router.route("/getall").get(protect, adminAut, getAllProduct);
 

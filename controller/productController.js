@@ -17,15 +17,21 @@ const getProduct = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const product = await Product.create({
-    owner: req.user.id,
-    name: req.body.name,
-    price: req.body.price,
-    quantity: req.body.quantity,
-    description: req.body.description,
-  });
-
-  res.status(200).json(product);
+  try {
+    const product = await Product.create({
+      owner: req.user._id,
+      name: req.body.name,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      description: req.body.description,
+    });
+    if (!product) {
+      res.status(400).json({ error: "product not saved" });
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(400).json({ error: `server error ` });
+  }
 };
 
 const updateProduct = async (req, res) => {
