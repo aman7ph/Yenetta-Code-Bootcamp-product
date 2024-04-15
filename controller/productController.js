@@ -9,7 +9,7 @@ const getAllProduct = async (req, res) => {
   res.status(200).json({ allProducts });
 };
 const getProduct = async (req, res) => {
-  const products = await Product.find({ owner: req.user.id });
+  const products = await Product.find({ owner: req.user._id });
   if (!products) {
     res.status(400).json({ error: "somthing went wrong" });
   }
@@ -36,7 +36,7 @@ const updateProduct = async (req, res) => {
       .json({ error: "the product that you want update product do not exit" });
   }
 
-  if (productToBeUpdated.owner.toString() !== req.user.id) {
+  if (productToBeUpdated.owner.toString() !== req.user._id) {
     res.status(401).json({ error: "you do not have the auterization" });
   }
 
@@ -56,7 +56,7 @@ const deletProduct = async (req, res) => {
       .json({ error: "the product that you want delet do not exit" });
   }
 
-  if (productToBeDeleted.owner.toString() !== req.user.id) {
+  if (productToBeDeleted.owner.toString() !== req.user._id) {
     res.status(401).json({ error: "you do not have the auterization" });
   }
 
