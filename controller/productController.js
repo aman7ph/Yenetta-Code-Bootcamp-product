@@ -2,18 +2,27 @@ const Joi = require("joi");
 const Product = require("../models/productModel");
 
 const getAllProduct = async (req, res) => {
-  const allProducts = await Product.find();
-  if (!allProducts) {
-    res.status(400).json({ error: "somthing went wrong" });
+  try {
+    const allProducts = await Product.find();
+    if (!allProducts) {
+      return res.status(400).json({ error: "somthing went wrong" });
+    }
+    return res.status(200).json({ allProducts });
+  } catch (error) {
+    return res.status(400).json({ error: `server error ` });
   }
-  res.status(200).json({ allProducts });
 };
 const getProduct = async (req, res) => {
-  const products = await Product.find({ owner: req.user._id });
-  if (!products) {
-    res.status(400).json({ error: "somthing went wrong" });
+  try {
+    const products = await Product.find({ owner: req.user._id });
+    if (!products) {
+      return res.status(400).json({ error: "somthing went wrong" });
+    }
+    return res.status(200).json({ products });
+  } catch (error) {
+    console.log(err);
+    return res.status(400).json({ error: `server error ` });
   }
-  res.status(200).json({ products });
 };
 
 const createProduct = async (req, res) => {
@@ -26,11 +35,12 @@ const createProduct = async (req, res) => {
       description: req.body.description,
     });
     if (!product) {
-      res.status(400).json({ error: "product not saved" });
+      return res.status(400).json({ error: "product not saved" });
     }
-    res.status(200).json(product);
+    return res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({ error: `server error ` });
+    console.log(err);
+    return res.status(400).json({ error: `server error ` });
   }
 };
 
