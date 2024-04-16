@@ -1,18 +1,22 @@
-const mongoos = require("mongoose");
 const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema(
   {
-    product_name: {
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      require: true,
+      ref: "User",
+    },
+    name: {
       type: String,
     },
-    product_price: {
+    price: {
       type: Number,
     },
-    product_quantity: {
+    quantity: {
       type: Number,
     },
-    product_description: {
+    description: {
       type: String,
     },
   },
