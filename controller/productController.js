@@ -3,11 +3,11 @@ const Product = require("../models/productModel");
 
 const getAllProduct = async (req, res) => {
   try {
-    const allProducts = await Product.find();
-    if (!allProducts) {
-      return res.status(400).json({ error: "somthing went wrong" });
+    const products = await Product.find();
+    if (!products) {
+      return res.status(400).json({ error: " no product yet plaese add" });
     }
-    return res.status(200).json({ allProducts });
+    return res.status(200).json(products);
   } catch (error) {
     return res.status(400).json({ error: `server error ` });
   }
@@ -18,7 +18,7 @@ const getProduct = async (req, res) => {
     if (!products) {
       return res.status(400).json({ error: "somthing went wrong" });
     }
-    return res.status(200).json({ products });
+    return res.status(200).json(products);
   } catch (error) {
     console.log(err);
     return res.status(400).json({ error: `server error ` });
@@ -61,7 +61,7 @@ const updateProduct = async (req, res) => {
     req.body,
     { new: true }
   );
-  res.status(200).json({ updatedProduct });
+  res.status(200).json(updatedProduct);
 };
 
 const deletProduct = async (req, res) => {
