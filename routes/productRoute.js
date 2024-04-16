@@ -15,7 +15,10 @@ router
   .route("/")
   .get(protect, getProduct)
   .post(productValidator, protect, createProduct);
-router.route("/:id").put(protect, updateProduct).delete(protect, deletProduct);
+router
+  .route("/change")
+  .put(protect, updateProduct)
+  .delete(protect, deletProduct);
 router.route("/getall").get(protect, adminAut, getAllProduct);
 
 module.exports = router;
